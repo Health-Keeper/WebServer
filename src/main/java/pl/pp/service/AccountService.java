@@ -1,5 +1,7 @@
 package pl.pp.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import pl.pp.service.dto.AccountDto;
 @Service
 public class AccountService {
 
+    private final Logger log = LoggerFactory.getLogger(AccountService.class);
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -27,6 +31,9 @@ public class AccountService {
 
         Account newAccount = new Account();
         accountDto.applyToEntity(newAccount, passwordEncoder);
+        newAccount.setActive(true);
+        accountRepository.save(newAccount);
+        log.info("New account created {0}", newAccount.getUsername());
     }
 
     private void checkPassword (String password) {

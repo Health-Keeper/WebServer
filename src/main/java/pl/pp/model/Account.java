@@ -28,7 +28,7 @@ public class Account implements Serializable {
     private String password;
 
     @Column(name = "active", nullable = false)
-    private boolean active
+    private boolean active;
 
     public Account () {
 
