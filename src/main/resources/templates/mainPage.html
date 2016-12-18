@@ -4,58 +4,98 @@
     <meta charset="UTF-8"/>
     <title>Health-Keeper</title>
 
+    <link href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <script src="../static/js/jquery-1.12.3.min.js"
+            th:src="@{/js/jquery-1.12.3.min.js}">
+    </script>
+
+    <script src="../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}">
+    </script>
+
     <script src="../static/js/Chart.min.js"
             th:src="@{/js/Chart.min.js}"/>
 
-    <script src="../static/js/jquery-3.1.1.min.js"
-            th:src="@{/js/jquery-3.1.1.min.js}"/>
+    <script th:inline="javascript">
+/*<![CDATA[*/
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log("Bandziorno");
+    var t = [[${result}]];
+    console.log(t);
+    var dataset;
+    dataset = [];
+    var labels = [];
+    for(var i = 0; i < t.length; i++){
+        var thisDiv = t[i]; // element
+        dataset.push(thisDiv);
+        var d = new Date();
+        labels.push(d.getDate());
+    }
 
-    <script id = "tt" data-text = "${name}" src="../static/js/test.js"
-            th:src="@{/js/test.js}" />
+    var ctx = document.getElementById("myChart");
+    var data = {
+        labels: labels,
+        datasets: [
+            {
+                label: "Cholesterol",
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)'
+                ],
+                borderWidth: 1,
+                data: dataset,
+            }
+        ]
+    };
+
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            },
+            responsive: true
+        }
+    });
+});
+/*]]>*/
+    </script>
 </head>
 <body>
-<h1>HEALTH-KEEPER ROCKS</h1>
-<p th:text="'Hello, ' + ${name} + '!'" />
 
-<canvas id="myChart" width="400" height="400"></canvas>
-<script>
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-</script>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-sm-4">
+            One of three columns
+        </div>
+        <div class="col-sm-4">
+            One of three columns
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
