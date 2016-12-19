@@ -6,6 +6,8 @@ import pl.pp.model.Account;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static javax.swing.text.StyleConstants.Size;
+
 /**
  * Created by dpp on 12/17/16.
  */
