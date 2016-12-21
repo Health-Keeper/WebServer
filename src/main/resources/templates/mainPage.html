@@ -88,11 +88,82 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <body>
 
 <div class="container">
+    <div class="parameter-chart-panel">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="systolic_press">Systolic pressure</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="diastolic_press">Diastolic pressure</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="heart_rate">Heart rate</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="temperature">Temperature</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="saturation" >Saturation</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="glucose">Glucose</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="cholesterol">Cholesterol</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="alcohol">Alcohol</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="skin_resistance">Skin resistance</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="step_rate">Step rate</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <p th:data="gps_position">GPS</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
             <canvas id="myChart"></canvas>
         </div>
     </div>
+    </div>
+
 </div>
 
 </body>
