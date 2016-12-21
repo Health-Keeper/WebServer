@@ -29,6 +29,8 @@ public class ParameterController {
     @Autowired
     private RestTemplate restTemplate;
 
+    //TODO: gps_position IS SPECIAL - HANDLE IT
+
     @RequestMapping(value = "/parameter", method = RequestMethod.GET)
     public String getParameter(@RequestParam(value="parameterType", required=false, defaultValue="systolic_press") String parameterType,
                                Model model){
