@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import pl.pp.controllers.MainPageController;
+import pl.pp.model.ParameterConstraints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class ParameterController {
     private RestTemplate restTemplate;
 
     //TODO: gps_position IS SPECIAL - HANDLE IT
+    //TODO: odziabać step_rate
 
     @RequestMapping(value = "/parameter", method = RequestMethod.GET)
     public String getParameter(@RequestParam(value="parameterType", required=false, defaultValue="systolic_press") String parameterType,
@@ -37,6 +39,7 @@ public class ParameterController {
         String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/"
                 +dateTime+","+parameterType+"/1", String.class);
         log.info(result);
+        ParameterConstraints constaint = ParameterConstraints.getParameterByName(parameterType);
         List<String> dates = new ArrayList<>();
         List<Double> parameters = new ArrayList<>();
         result = result.replaceAll("\\\\", "");
@@ -49,7 +52,10 @@ public class ParameterController {
             dates.add(j.get(dateTime).toString());
             log.info(j.toString());
         }
+
         model.addAttribute("result", parameters);
+        model.addAttribute("min", constaint.getMinAcceptedValue());
+        model.addAttribute("max", constaint.getMaxAcceptedValue());
         return "chartPage";
     }
 

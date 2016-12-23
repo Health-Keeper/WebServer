@@ -3,6 +3,9 @@ package pl.pp.model;
 /**
  * Created by dpp on 12/23/16.
  */
+
+//TODO: Add parameter label for chart
+
 public enum ParameterConstraints {
     SYSTOLIC_PRESS("systolic_press", 40, 220),
     DIASTOLIC_PRESS("diastolic_press", 30, 120),
@@ -34,6 +37,38 @@ public enum ParameterConstraints {
 
     public double getMaxAcceptedValue() {
         return maxAcceptedValue;
+    }
+
+    public static ParameterConstraints getParameterByName(String parameterName) {
+        switch (parameterName)
+        {
+            case "systolic_press":
+                return ParameterConstraints.SYSTOLIC_PRESS;
+            case "diastolic_press":
+                return ParameterConstraints.DIASTOLIC_PRESS;
+            case "heart_rate":
+                return ParameterConstraints.HEART_RATE;
+            case "temperature":
+                return ParameterConstraints.TEMPERATURE;
+            case "saturation":
+                return ParameterConstraints.SATURATION;
+            case "glucose":
+                return ParameterConstraints.GLUCOSE;
+            case "cholesterol":
+                return ParameterConstraints.CHOLESTEROL_LDL;
+            case "alcohol":
+                return ParameterConstraints.ALCOHOL;
+            case "skin_resistance":
+                return ParameterConstraints.SKIN_RESISTANCE;
+            case "step_rate":
+                return ParameterConstraints.STEP_RATE;
+            case "gps_position_latitude":
+                return ParameterConstraints.LATITUDE;
+            case "gps_position_longitude":
+                return ParameterConstraints.LONGITUDE;
+            default:
+                return SYSTOLIC_PRESS;
+        }
     }
 
     private String parameterName;
