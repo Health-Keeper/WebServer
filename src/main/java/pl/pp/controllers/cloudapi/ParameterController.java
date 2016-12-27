@@ -39,7 +39,7 @@ public class ParameterController {
         String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/"
                 +dateTime+","+parameterType+"/1", String.class);
         log.info(result);
-        ParameterConstraints constaint = ParameterConstraints.getParameterByName(parameterType);
+        ParameterConstraints constraint = ParameterConstraints.getParameterByName(parameterType);
         List<String> dates = new ArrayList<>();
         List<Double> parameters = new ArrayList<>();
         result = result.replaceAll("\\\\", "");
@@ -52,10 +52,11 @@ public class ParameterController {
             dates.add(j.get(dateTime).toString());
             log.info(j.toString());
         }
+        model.addAttribute("parameterName", constraint.getParameterName().replace("_", " "));
         model.addAttribute("labels", dates);
         model.addAttribute("result", parameters);
-        model.addAttribute("min", constaint.getMinAcceptedValue());
-        model.addAttribute("max", constaint.getMaxAcceptedValue());
+        model.addAttribute("min", constraint.getMinAcceptedValue());
+        model.addAttribute("max", constraint.getMaxAcceptedValue());
         return "chartPage";
     }
 
