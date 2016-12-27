@@ -6,7 +6,7 @@ Web server for our system
 - [ ] Align with Anton about Person REST API
 - [x] Align with Sebpot about constraints in chart values - maybe new structure
 - [x] Create JS for generating different charts
-- [ ] Create line chart and handle leftovers
+- [ ] Create line chart and handle leftovers - TODO: 27.12.2017
 - [ ] From Tournament++ take some Thymeleaf templates for greater good 
 - [ ] Allow for user logging - create/edit user - remember about security issues
 
