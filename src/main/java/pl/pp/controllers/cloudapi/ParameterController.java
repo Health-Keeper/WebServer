@@ -52,7 +52,7 @@ public class ParameterController {
             dates.add(j.get(dateTime).toString());
             log.info(j.toString());
         }
-
+        model.addAttribute("labels", dates);
         model.addAttribute("result", parameters);
         model.addAttribute("min", constaint.getMinAcceptedValue());
         model.addAttribute("max", constaint.getMaxAcceptedValue());
