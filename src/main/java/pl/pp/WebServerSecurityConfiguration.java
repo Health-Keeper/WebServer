@@ -44,14 +44,14 @@ public class WebServerSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .dataSource(dataSource)
 //                .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery(
-                        "SELECT id, username, password, is_active"
+                        "SELECT username, password, is_active"
                                 + " FROM Person"
                                 + " WHERE username = ?"
                 )
                 .authoritiesByUsernameQuery(
-                        "SELECT username"
+                        "SELECT username USER_ROLE"
                                 + " FROM Person"
-                                + " WHERE username = ? AND is_active = TRUE"
+                                + " WHERE username = ? AND is_active = True"
                 );
     }
 
@@ -59,10 +59,10 @@ public class WebServerSecurityConfiguration extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-//                .antMatchers("/person/**").authenticated()
-        .anyRequest().permitAll();
-        http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
-        http.logout().logoutSuccessUrl("/login")
+                .antMatchers("/person/**").authenticated()
+        .anyRequest().permitAll()
+        .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
+        .and().logout().logoutSuccessUrl("/login")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
     }
 }
