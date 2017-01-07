@@ -48,13 +48,13 @@ public class MainPageController {
     }
 
     // Login form
-    @RequestMapping("/login")
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String login() {
-        return "login.html";
+        return "login";
     }
 
     // Login form with error
-    @RequestMapping("/login-error")
+    @RequestMapping(path = "/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
