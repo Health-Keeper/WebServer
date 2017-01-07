@@ -31,7 +31,6 @@ public class ParameterController {
     private RestTemplate restTemplate;
 
     //TODO: gps_position IS SPECIAL - HANDLE IT
-    //TODO: odziabać step_rate
 
     @RequestMapping(value = "/parameter", method = RequestMethod.GET)
     public String getParameter(@RequestParam(value="parameterType", required=false, defaultValue="systolic_press") String parameterType,
