@@ -8,10 +8,10 @@ import java.io.Serializable;
 /**
  * Created by dpp on 12/17/16.
  */
-@Entity (name = "Account")
-@Table (name = "account")
+@Entity (name = "person")
+@Table (name = "Person")
 @SequenceGenerator ( name = "account_sequence", sequenceName = "account_sequence", allocationSize = 1)
-public class Account implements Serializable {
+public class Person implements Serializable {
 
     @Id
     @GeneratedValue (generator = "account_sequence", strategy = GenerationType.SEQUENCE)
@@ -30,14 +30,18 @@ public class Account implements Serializable {
     @Column(name = "active", nullable = false)
     private boolean active;
 
-    public Account () {
+    public Person () {
 
     }
 
-    public Account (String username, String password, boolean active) {
+    public Person (String username, String password, boolean active) {
         this.username = username;
         this.password = password;
         this.active = active;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getUsername() {
