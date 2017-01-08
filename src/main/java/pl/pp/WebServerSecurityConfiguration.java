@@ -40,7 +40,7 @@ public class WebServerSecurityConfiguration extends WebSecurityConfigurerAdapter
     protected void configure(AuthenticationManagerBuilder builder)
             throws Exception {
 
-        builder.jdbcAuthentication()
+        /*builder.jdbcAuthentication()
                 .dataSource(dataSource)
 //                .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery(
@@ -52,7 +52,8 @@ public class WebServerSecurityConfiguration extends WebSecurityConfigurerAdapter
                         "SELECT username USER_ROLE"
                                 + " FROM Person"
                                 + " WHERE username = ? AND is_active = True"
-                );
+                );*/
+        builder.inMemoryAuthentication().withUser("user").password("password").roles("USER");
     }
 
     @Override
