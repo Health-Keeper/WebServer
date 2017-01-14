@@ -30,20 +30,21 @@ public class MainPageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String greeting(Model model) {
-        String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/alcohol,cholesterol/1", String.class);
-        //model.addAttribute("name", "SIEMA XD");
+        // String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/alcohol,cholesterol/1", String.class);
+        // //model.addAttribute("name", "SIEMA XD");
+        //
+        // List<Double> alcoholParameters = new ArrayList<>();
+        // result = result.replaceAll("\\\\", "");
+        // result = result.replaceAll("\"", "");
+        // log.info(result);
+        // JSONArray json = new JSONArray (result);
+        // for (int i = 0; i < json.length(); i++) {
+        //     JSONObject j = json.getJSONObject(i);
+        //     alcoholParameters.add(j.getDouble("cholesterol"));
+        //     log.info(j.toString());
+        // }
+        // model.addAttribute("result", alcoholParameters);
 
-        List<Double> alcoholParameters = new ArrayList<>();
-        result = result.replaceAll("\\\\", "");
-        result = result.replaceAll("\"", "");
-        log.info(result);
-        JSONArray json = new JSONArray (result);
-        for (int i = 0; i < json.length(); i++) {
-            JSONObject j = json.getJSONObject(i);
-            alcoholParameters.add(j.getDouble("cholesterol"));
-            log.info(j.toString());
-        }
-        model.addAttribute("result", alcoholParameters);
         return "mainPage";
     }
 
