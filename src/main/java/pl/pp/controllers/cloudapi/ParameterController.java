@@ -48,15 +48,18 @@ public class ParameterController {
                                Model model){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         String name = auth.getName();
         String userId = name.charAt(name.length()-1)+"";
         String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/"
                 +dateTime+","+parameterType+"/"+userId, String.class);
+
         ParameterConstraints constraint = ParameterConstraints.getParameterByName(parameterType);
         List<String> dates = new ArrayList<>();
         List<Double> parameters = new ArrayList<>();
         result = result.replaceAll("\\\\", "");
-        result = result.substring(1, result.length()-1);;
+        result = result.substring(1, result.length()-1);
+
         JSONArray json = new JSONArray (result);
         for (int i = 0; i < json.length(); i++) {
             JSONObject j = json.getJSONObject(i);
@@ -64,12 +67,19 @@ public class ParameterController {
             dates.add(j.get(dateTime).toString());
         }
 
+        String accident = restTemplate.getForObject("http://health-keeper-api.gear.host/api/PersonAccident/"+userId, String.class);
+
+        accident = accident.replaceAll("\\\\", "");
+        accident = accident.substring(1, accident.length()-1);
+        JSONObject accidentJson = new JSONObject (accident);
+
         model.addAttribute("parameterName", constraint.getParameterName().replace("_", " "));
         model.addAttribute("person", "/person/data");
         model.addAttribute("labels", dates);
         model.addAttribute("result", parameters);
         model.addAttribute("min", constraint.getMinAcceptedValue());
         model.addAttribute("max", constraint.getMaxAcceptedValue());
+        model.addAttribute("accident", accidentJson);
         return "chartPage";
     }
 

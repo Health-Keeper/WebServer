@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,20 +32,17 @@ public class MainPageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String greeting(Model model) {
-        // String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/alcohol,cholesterol/1", String.class);
-        // //model.addAttribute("name", "SIEMA XD");
-        //
-        // List<Double> alcoholParameters = new ArrayList<>();
-        // result = result.replaceAll("\\\\", "");
-        // result = result.replaceAll("\"", "");
-        // log.info(result);
-        // JSONArray json = new JSONArray (result);
-        // for (int i = 0; i < json.length(); i++) {
-        //     JSONObject j = json.getJSONObject(i);
-        //     alcoholParameters.add(j.getDouble("cholesterol"));
-        //     log.info(j.toString());
-        // }
-        // model.addAttribute("result", alcoholParameters);
+//        log.debug("Start");
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//            log.debug("Auth Getted");
+//            String name = auth.getName();
+//            String userId = name.charAt(name.length()-1)+"";
+//            String accident = restTemplate.getForObject("http://health-keeper-api.gear.host/api/PersonAccident/"+userId, String.class);
+//            accident = accident.replaceAll("\\\\", "");
+//            accident = accident.substring(1, accident.length()-1);
+//
+//            JSONObject accidentJson = new JSONObject (accident);
+//            model.addAttribute("accident", accidentJson);
 
         return "mainPage";
     }
