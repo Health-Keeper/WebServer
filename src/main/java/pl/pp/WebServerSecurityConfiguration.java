@@ -54,7 +54,9 @@ public class WebServerSecurityConfiguration extends WebSecurityConfigurerAdapter
                                 + " FROM Person"
                                 + " WHERE username = ? AND is_active = True"
                 );*/
-        builder.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+        builder.inMemoryAuthentication().withUser("user1").password("password1").roles("USER");
+        builder.inMemoryAuthentication().withUser("user2").password("password2").roles("USER");
+        builder.inMemoryAuthentication().withUser("user3").password("password3").roles("USER");
     }
 
     @Override

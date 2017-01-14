@@ -5,7 +5,10 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,36 +37,35 @@ public class ParameterController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    private PersonService personService;
+//    @Autowired
+//    private PersonService personService;
+//
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @RequestMapping(value = "/person/{personId}/data", method = RequestMethod.GET)
-    public String getParameter(@PathVariable long personId, @RequestParam(value="parameterType", required=false, defaultValue="systolic_press") String parameterType,
+    @RequestMapping(value = "/person/data", method = RequestMethod.GET)
+    public String getParameter(@RequestParam(value="parameterType", required=false, defaultValue="systolic_press") String parameterType,
                                Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        String userId = name.charAt(name.length()-1)+"";
         String result = restTemplate.getForObject("http://health-keeper-api.gear.host/api/Measurement/params/"
-                +dateTime+","+parameterType+"/"+personId, String.class);
-//        log.info(result);
+                +dateTime+","+parameterType+"/"+userId, String.class);
         ParameterConstraints constraint = ParameterConstraints.getParameterByName(parameterType);
         List<String> dates = new ArrayList<>();
         List<Double> parameters = new ArrayList<>();
         result = result.replaceAll("\\\\", "");
-        result = result.substring(1, result.length()-1);
-//        log.info(result);
+        result = result.substring(1, result.length()-1);;
         JSONArray json = new JSONArray (result);
         for (int i = 0; i < json.length(); i++) {
             JSONObject j = json.getJSONObject(i);
             parameters.add(Double.parseDouble(j.getString(parameterType)));
             dates.add(j.get(dateTime).toString());
-//            log.info(j.toString());
         }
 
-        log.info(passwordEncoder.encode("12345"));
-
         model.addAttribute("parameterName", constraint.getParameterName().replace("_", " "));
-        model.addAttribute("person", "/person/"+personId+"/data");
+        model.addAttribute("person", "/person/data");
         model.addAttribute("labels", dates);
         model.addAttribute("result", parameters);
         model.addAttribute("min", constraint.getMinAcceptedValue());
