@@ -32,18 +32,18 @@ public class MainPageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String greeting(Model model) {
-//        log.debug("Start");
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//            log.debug("Auth Getted");
-//            String name = auth.getName();
-//            String userId = name.charAt(name.length()-1)+"";
-//            String accident = restTemplate.getForObject("http://health-keeper-api.gear.host/api/PersonAccident/"+userId, String.class);
-//            accident = accident.replaceAll("\\\\", "");
-//            accident = accident.substring(1, accident.length()-1);
-//
-//            JSONObject accidentJson = new JSONObject (accident);
-//            model.addAttribute("accident", accidentJson);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if (name.compareTo("anonymousUser") != 0) {
+            String userId = name.charAt(name.length()-1)+"";
+            String accident = restTemplate.getForObject("http://health-keeper-api.gear.host/api/PersonAccident/"+userId, String.class);
+            accident = accident.replaceAll("\\\\", "");
+            accident = accident.substring(1, accident.length()-1);
+
+            JSONObject accidentJson = new JSONObject (accident);
+            model.addAttribute("accident", accidentJson);
+        }
         return "mainPage";
     }
 
