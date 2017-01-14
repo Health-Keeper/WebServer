@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import javax.sql.DataSource;
 
@@ -65,5 +66,10 @@ public class WebServerSecurityConfiguration extends WebSecurityConfigurerAdapter
         .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
         .and().logout().logoutSuccessUrl("/login")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+    }
+
+    @Bean
+    public SpringSecurityDialect springSecurityDialect(){
+       return new SpringSecurityDialect();
     }
 }

@@ -1,91 +1,34 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8"/>
-    <title>Health-Keeper</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link href="../static/css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
     <link href="../static/css/custom.css"
           th:href="@{/css/custom.css}" rel="stylesheet"/>
 
-    <!--<script src="../static/js/jquery-1.12.3.min.js"-->
-            <!--th:src="@{/js/jquery-1.12.3.min.js}">-->
-    <!--</script>-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+          rel="stylesheet"/>
 
-    <!--<script src="../static/js/bootstrap.min.js"-->
-            <!--th:src="@{/js/bootstrap.min.js}">-->
-    <!--</script>-->
-
-    <script src="../static/js/Chart.min.js"
-            th:src="@{/js/Chart.min.js}"/>
-
-    <script th:inline="javascript">
-/*<![CDATA[*/
-document.addEventListener("DOMContentLoaded", function(event) {
-    console.log("Bandziorno");
-    var t = [[${result}]];
-    console.log(t);
-    var dataset;
-    dataset = [];
-    var labels = [];
-    for(var i = 0; i < t.length; i++){
-        var thisDiv = t[i]; // element
-        dataset.push(thisDiv);
-        var d = new Date();
-        var lab = String(d.getHours()) + ":" + String(d.getMinutes()) + ":" + String(d.getSeconds());
-        labels.push(lab);
-    }
-
-    var ctx = document.getElementById("myChart");
-    var data = {
-        labels: labels,
-        datasets: [
-            {
-                label: "Cholesterol",
-//                backgroundColor: [
-//                    'rgba(75, 192, 192, 0.2)',
-//                    'rgba(75, 192, 192, 0.2)',
-//                    'rgba(75, 192, 192, 0.2)',
-//                    'rgba(75, 192, 192, 0.2)',
-//                    'rgba(75, 192, 192, 0.2)',
-//                    'rgba(75, 192, 192, 0.2)'
-//                ],
-//                borderColor: [
-//                    'rgba(255,99,132,1)',
-//                    'rgba(255,99,132,1)',
-//                    'rgba(255,99,132,1)',
-//                    'rgba(255,99,132,1)',
-//                    'rgba(255,99,132,1)',
-//                    'rgba(255,99,132,1)'
-//                ],
-                borderWidth: 1,
-                data: dataset,
-            }
-        ]
-    };
-
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    scaleOverride : true,
-                    scaleSteps : 10,
-                    scaleStepWidth : 10,
-                    scaleStartValue : 90
-                }]
-            },
-            responsive: true
-        }
-    });
-});
-/*]]>*/
+    <script src="../static/js/jquery-1.12.3.min.js"
+            th:src="@{/js/jquery-1.12.3.min.js}">
     </script>
+
+    <script src="../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}">
+    </script>
+
+    <title>Health-Keeper</title>
+
 </head>
 
 <body>
@@ -102,13 +45,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button><!--/navbar-toggle-->
-                <a class="navbar-brand" href="/">Health Keeper</a>
+                <a class="navbar-brand" href="/">
+                    <i class="fa fa-medkit" aria-hidden="true"></i> Health Keeper
+                </a>
             </div><!--/navbar-header-->
 
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="isAuthenticated()">
                         <a href="/person/1/data">Personal data</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">Logout</a>
                     </li>
                     <li sec:authorize="isAnonymous()">
                         <a href="/login">Login</a>
@@ -118,83 +66,36 @@ document.addEventListener("DOMContentLoaded", function(event) {
         </div><!--/container-->
     </nav><!--/navbar-->
 
-<div class="container" id="content-box">
-    <div class="parameter-chart-panel">
-    <div class="row">
-        <div class="col-sm-3">
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="systolic_press">Systolic pressure</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="diastolic_press">Diastolic pressure</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="heart_rate">Heart rate</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="temperature">Temperature</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="saturation" >Saturation</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="glucose">Glucose</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="cholesterol">Cholesterol</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="alcohol">Alcohol</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="skin_resistance">Skin resistance</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="step_rate">Step rate</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <p th:data="gps_position">GPS</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
+    <div class="jumbotron" style="margin-top: 20px;">
+        <h1><i class="fa fa-medkit" aria-hidden="true"></i></h1>
+        <h1 class="hk-title">HEALTH KEEPER</h1>
+        <h3><span class="label label-warning">Your personal health assistant.</span></h3>
     </div>
 
+<div class="container">
+    <h2>What is Health Keeper?</h2>
+    <p class="lead">
+        Health Keeper is a unique service that helps you to stay healthy.
+        It monitors your life parameters, like blood pressure, temperature,
+        heart rate or skin resistance and immediately alerts if there a minor
+        risk for any type of an accident.
+    </p>
+    <p class="lead">
+        With Health Keeper you can stare aware of any threats happening at this
+        period of time around you. Travelling to another country? Check Health
+        Pocket for a target location to find out, which medicine to grab with
+        you.
+    </p>
+    <p class="lead">
+        Rumors about another flu epidemy? Check our service to find out, how
+        many people are currently ill with this disease and decide, whether to
+        take more vitamins.
+    </p>
+    <p class="lead">
+        What is the most important – if you are faced with any unexpected health
+        issue, Health Pocket will immediately alert to your doctor your recent
+        symptoms to ensure the most accurate diagnosis ever possible.
+    </p>
 </div>
 
 </body>

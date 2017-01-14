@@ -1,3 +1,30 @@
 #content-box {
     margin-top: 50px;
 }
+
+#parameter-box,
+#signin-panel {
+    margin-top: 20px;
+}
+
+a.navbar-brand:link,
+a.navbar-brand:visited,
+a.navbar-brand:active,
+a.navbar-brand:hover {
+    color: #ffffff;
+}
+
+.jumbotron {
+    background-image: url('/images/doctor-563428.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.jumbotron .hk-title {
+    font-weight: bold;
+}

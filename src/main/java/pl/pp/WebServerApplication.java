@@ -15,7 +15,6 @@ import pl.pp.repository.PersonRepository;
 
 @SpringBootApplication
 public class WebServerApplication extends SpringBootServletInitializer {
-
 	public static void main(String[] args) {
 		SpringApplication.run(WebServerApplication.class, args);
 	}

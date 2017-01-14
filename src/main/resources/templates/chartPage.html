@@ -1,22 +1,36 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8"/>
-    <title>Health-Keeper</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link href="../static/css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 
-    <!--<script src="../static/js/jquery-1.12.3.min.js"-->
-    <!--th:src="@{/js/jquery-1.12.3.min.js}">-->
-    <!--</script>-->
+    <link href="../static/css/custom.css"
+          th:href="@{/css/custom.css}" rel="stylesheet"/>
 
-    <!--<script src="../static/js/bootstrap.min.js"-->
-    <!--th:src="@{/js/bootstrap.min.js}">-->
-    <!--</script>-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+          rel="stylesheet"/>
+
+    <script src="../static/js/jquery-1.12.3.min.js"
+            th:src="@{/js/jquery-1.12.3.min.js}">
+    </script>
+
+    <script src="../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}">
+    </script>
 
     <script src="../static/js/Chart.min.js"
             th:src="@{/js/Chart.min.js}"/>
+
+    <title>Personal data :: Health-Keeper</title>
 
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -87,88 +101,117 @@
         getElementsByClassName("example");
         /*]]>*/
     </script>
+
 </head>
+
 <body>
 
-<div class="container">
-    <div class="parameter-chart-panel">
-        <div class="row">
-            <div class="col-sm-3">
-                <!--TODO ODZIABAĆ TO MOŻE JS-EM?-->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=systolic_press}"
-                           class="parameter-button btn btn-info btn-block" attr="systolic_press">Systolic pressure</a>
-                    </div>
-                </div>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#navbar-collapse-1"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button><!--/navbar-toggle-->
+                <a class="navbar-brand" href="/">
+                    <i class="fa fa-medkit" aria-hidden="true"></i> Health Keeper
+                </a>
+            </div><!--/navbar-header-->
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=diastolic_press}"
-                           class="parameter-button btn btn-info btn-block" attr="diastolic_press">Diastolic pressure</a>
-                    </div>
-                </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/person/1/data">Personal data</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">Logout</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a href="/login">Login</a>
+                    </li>
+                </ul><!--/navbar-nav-->
+            </div><!--/navbar-collapse-->
+        </div><!--/container-->
+    </nav><!--/navbar-->
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=heart_rate}"
-                           class="parameter-button btn btn-info btn-block" attr="heart_rate">Heart rate</a>
-                    </div>
-                </div>
+<div class="container" id="content-box">
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=temperature}"
-                           class="parameter-button btn btn-info btn-block" attr="temperature">Temperature</a>
-                    </div>
-                </div>
+    <div class="col-sm-3">
+        <div class="panel panel-default" id="parameter-box">
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=saturation}"
-                           class="parameter-button btn btn-info btn-block" attr="saturation" >Saturation</a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=glucose}"
-                           class="parameter-button btn btn-info btn-block" attr="glucose">Glucose</a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=cholesterol}"
-                           class="parameter-button btn btn-info btn-block" attr="cholesterol">Cholesterol</a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=alcohol}"
-                           class="parameter-button btn btn-info btn-block" attr="alcohol">Alcohol</a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{?parameterType=skin_resistance}"
-                           class="parameter-button btn btn-info btn-block" attr="skin_resistance">Skin resistance</a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="#" th:href="@{/?parameterType=step_rate}"
-                           class="parameter-button btn btn-info btn-block" attr="step_rate">Step rate</a>
-                    </div>
-                </div>
+            <div class="panel-heading">
+                Parameters
             </div>
-            <div class="col-sm-9">
-                <canvas id="myChart"></canvas>
-            </div>
-        </div>
+
+            <div class="list-group">
+
+                <a href="#" th:href="@{?parameterType=systolic_press}"
+                   class="list-group-item" attr="systolic_press">
+                   Systolic pressure
+                </a>
+
+                <a href="#" th:href="@{?parameterType=diastolic_press}"
+                   class="list-group-item" attr="diastolic_press">
+                   Diastolic pressure
+                </a>
+
+                <a href="#" th:href="@{?parameterType=heart_rate}"
+                   class="list-group-item" attr="heart_rate">
+                   Heart rate
+                </a>
+
+                <a href="#" th:href="@{?parameterType=temperature}"
+                   class="list-group-item" attr="temperature">
+                   Body temperature
+                </a>
+
+                <a href="#" th:href="@{?parameterType=saturation}"
+                   class="list-group-item" attr="saturation">
+                   Blood oxygen saturation
+                </a>
+
+                <a href="#" th:href="@{?parameterType=glucose}"
+                   class="list-group-item" attr="glucose">
+                   Blood glucose content
+                </a>
+
+                <a href="#" th:href="@{?parameterType=cholesterol}"
+                   class="list-group-item" attr="cholesterol">
+                   Blood cholesterol content
+                </a>
+
+                <a href="#" th:href="@{?parameterType=alcohol}"
+                   class="list-group-item" attr="alcohol">
+                   Blood alcohol content
+                </a>
+
+                <a href="#" th:href="@{?parameterType=skin_resistance}"
+                   class="list-group-item" attr="skin_resistance">
+                   Electrodermal response
+                </a>
+
+                <a href="#" th:href="@{?parameterType=step_rate}"
+                   class="list-group-item" attr="step_rate">
+                   Steps
+                </a>
+
+            </div><!--/list-group-->
+
+        </div><!--/panel-->
+
+    </div><!--/col-sm-3-->
+
+    <div class="col-sm-9">
+
+        <h3>Parameter value change</h3>
+
+        <canvas id="myChart"></canvas>
+
     </div>
 
 </div>
