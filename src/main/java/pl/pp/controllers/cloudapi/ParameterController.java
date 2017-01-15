@@ -72,6 +72,8 @@ public class ParameterController {
         accident = accident.replaceAll("\\\\", "");
         accident = accident.substring(1, accident.length()-1);
         JSONObject accidentJson = new JSONObject (accident);
+        JSONObject accidentObject = accidentJson.getJSONObject("accident");
+        String accidentName = accidentObject.getString("name");
 
         model.addAttribute("parameterName", constraint.getParameterName().replace("_", " "));
         model.addAttribute("person", "/person/data");
@@ -79,7 +81,7 @@ public class ParameterController {
         model.addAttribute("result", parameters);
         model.addAttribute("min", constraint.getMinAcceptedValue());
         model.addAttribute("max", constraint.getMaxAcceptedValue());
-        model.addAttribute("accident", accidentJson);
+        model.addAttribute("accident", accidentName);
         return "chartPage";
     }
 

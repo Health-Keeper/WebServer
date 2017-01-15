@@ -126,7 +126,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="isAuthenticated()">
-                        <a href="/person/1/data">Personal data</a>
+                        <a href="/person/data">Personal data</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a href="/logout">Logout</a>
@@ -140,6 +140,14 @@
     </nav><!--/navbar-->
 
 <div class="container" id="content-box">
+
+    <div class="row" style="margin-top: 20px">
+        <div class="alert alert-danger text-center" role="alert">
+            <strong>Warning!</strong> You might have an accident:
+            <strong th:text="${accident}">
+            </strong>!
+        </div>
+    </div>
 
     <div class="col-sm-3">
         <div class="panel panel-default" id="parameter-box">
