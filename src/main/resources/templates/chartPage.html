@@ -144,8 +144,8 @@
     <div class="row" style="margin-top: 20px">
         <div class="alert alert-danger text-center" role="alert">
             <strong>Warning!</strong> You might have an accident:
-            <strong th:text="${accident}">
-            </strong>!
+            <strong th:text="${accident}"></strong>!
+            Please contact your doctor immediately.
         </div>
     </div>
 
@@ -219,6 +219,40 @@
         <h3>Parameter value change</h3>
 
         <canvas id="myChart"></canvas>
+
+        <dl class="dl-horizontal">
+
+            <dt>Systolic pressure</dt>
+            <dd>your max pressure during the heartbeat, also known as “upper” pressure</dd>
+
+            <dt>Diastolic pressure</dt>
+            <dd>your min pressure during the heartbeat, also known as “lower” pressure</dd>
+
+            <dt>Heart rate</dt>
+            <dd>number of your heart beats per minute</dd>
+
+            <dt>Body temperature</dt>
+            <dd>temperature of your body</dd>
+
+            <dt>Blood oxygen saturation</dt>
+            <dd>shows the proportion of your blood cells full of oxygen to the total amount of blood cells</dd>
+
+            <dt>Blood glucose content</dt>
+            <dd>shows the amount of glucose (sugar) that is present in your blood</dd>
+
+            <dt>Blood cholesterol content</dt>
+            <dd>shows the amount of cholesterol in your blood</dd>
+
+            <dt>Blood alcohol content</dt>
+            <dd>shows the amount of alcohol in your blood</dd>
+
+            <dt>Electrodermal response</dt>
+            <dd>measures your skin conductivity, identifying the state of your sweating glands and neural system</dd>
+
+            <dt>Steps</dt>
+            <dd>shows the number of steps, you’ve done today</dd>
+
+        </dl>
 
     </div>
 
